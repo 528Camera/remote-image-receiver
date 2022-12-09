@@ -4,4 +4,4 @@ include_directories(${PROTOBUF_INCLUDE_DIR})
 
 protobuf_generate_cpp(PROTO_SRC PROTO_HEADER message.proto)
 
-add_library(proto ${PROTO_HEADER} ${PROTO_SRC})
+add_library(proto ${PROTO_HEADER} ${PROTO_SRC} ../tests/main.cpp)
