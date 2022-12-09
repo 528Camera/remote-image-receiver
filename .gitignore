@@ -1,0 +1,6 @@
+# Folders
+cmake-build-debug
+.idea
+
+# Files
+*.dat
