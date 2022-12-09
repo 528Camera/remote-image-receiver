@@ -18,6 +18,7 @@ find_library(ZeroMQ_LIBRARY
         PATHS ${PC_ZeroMQ_LIBRARY_DIRS})
 
 include_directories(${Boost_INCLUDE_DIR})
+target_link_libraries(receiver-tests LINK_PUBLIC Boost::log_setup Boost::log)
 target_link_libraries(receiver-tests LINK_PUBLIC ${Boost_LIBRARIES})
 target_link_libraries(receiver-tests LINK_PUBLIC ${ZeroMQ_LIBRARY})
 target_link_libraries(receiver-tests LINK_PUBLIC libcppunit.so)

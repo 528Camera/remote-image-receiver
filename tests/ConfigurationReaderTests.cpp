@@ -2,6 +2,7 @@
  * Объявление тестов объекта для чтения и хранения конфигурационных параметров.
  */
 
+#include <boost/log/trivial.hpp>
 #include "ConfigurationReader.h"
 #include "ConfigurationReaderTests.h"
 
@@ -10,6 +11,7 @@ using namespace std;
 
 void ConfigurationReaderTests::fromFileTest()
 {
+    BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
     Configuration config;
     // Случай с некорректным файлом.
     string badStr = "bad";

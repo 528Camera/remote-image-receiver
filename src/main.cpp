@@ -2,11 +2,11 @@
  * Точка входа в приложение.
  */
 
-#include <iostream>
+#include <boost/log/trivial.hpp>
 using namespace std;
 
 int main()
 {
-    cout << "I am RECEIVER";
+    BOOST_LOG_TRIVIAL(info) << "Запуск обработчика пакетов";
     return 0;
 }

@@ -4,7 +4,8 @@ cmake_minimum_required(VERSION 3.5.1)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-find_package(Boost COMPONENTS system filesystem unit_test_framework REQUIRED)
+find_package(Boost COMPONENTS system filesystem unit_test_framework log log_setup REQUIRED)
+
 find_package(PkgConfig)
 pkg_check_modules(PC_ZeroMQ QUIET zmq)
 find_path(ZeroMQ_INCLUDE_DIR
