@@ -5,6 +5,7 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/ui/text/TestRunner.h>
 #include "ConfigurationReaderTests.h"
+#include "MessageStorageTests.h"
 
 
 int main()

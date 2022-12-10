@@ -1,5 +1,5 @@
 /**
- * Объявление тестов объекта для чтения и хранения конфигурационных параметров.
+ * Реализация тестов объекта для чтения и хранения конфигурационных параметров.
  */
 
 #include <boost/log/trivial.hpp>
@@ -9,8 +9,7 @@
 using namespace receiver;
 using namespace std;
 
-void ConfigurationReaderTests::fromFileTest()
-{
+void ConfigurationReaderTests::fromFileTest() {
     BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
     Configuration config;
     // Случай с некорректным файлом.

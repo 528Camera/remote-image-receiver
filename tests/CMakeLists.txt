@@ -1,10 +1,13 @@
 set(SOURCE_FILES
         ../src/ConfigurationReader.h
         ../src/ConfigurationReader.cpp
+        ../src/MessageStorage.h
+        ../src/MessageStorage.cpp
         ConfigurationReaderTests.h
         ConfigurationReaderTests.cpp
-        main.cpp
-)
+        MessageStorageTests.h
+        MessageStorageTests.cpp
+        main.cpp)
 
 add_executable(receiver-tests ${SOURCE_FILES})
 
