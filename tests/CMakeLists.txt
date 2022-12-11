@@ -3,10 +3,14 @@ set(SOURCE_FILES
         ../src/ConfigurationReader.cpp
         ../src/MessageStorage.h
         ../src/MessageStorage.cpp
+        ../src/ZmqProxy.h
+        ../src/ZmqProxy.cpp
         ConfigurationReaderTests.h
         ConfigurationReaderTests.cpp
         MessageStorageTests.h
         MessageStorageTests.cpp
+        ZmqProxyTests.h
+        ZmqProxyTests.cpp
         main.cpp)
 
 add_executable(receiver-tests ${SOURCE_FILES})

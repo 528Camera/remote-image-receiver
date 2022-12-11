@@ -6,7 +6,11 @@
 #include <cppunit/ui/text/TestRunner.h>
 #include "ConfigurationReaderTests.h"
 #include "MessageStorageTests.h"
+#include "ZmqProxyTests.h"
 
+CPPUNIT_TEST_SUITE_REGISTRATION(ConfigurationReaderTests);
+CPPUNIT_TEST_SUITE_REGISTRATION(MessageStorageTests);
+CPPUNIT_TEST_SUITE_REGISTRATION(ZmqProxyTests);
 
 int main()
 {

@@ -33,6 +33,4 @@ public:
     void getMessagesTest();
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(MessageStorageTests);
-
 #endif //RECEIVER_MESSAGESTORAGETESTS_H

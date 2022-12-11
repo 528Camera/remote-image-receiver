@@ -21,6 +21,4 @@ public:
     void fromFileTest();
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(ConfigurationReaderTests);
-
 #endif //ZMQ_RECEIVER_CONFIGURATIONREADERTESTS_H
