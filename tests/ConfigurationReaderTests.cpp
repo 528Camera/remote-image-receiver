@@ -10,7 +10,7 @@ using namespace receiver;
 using namespace std;
 
 void ConfigurationReaderTests::fromFileTest() {
-    BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
+    BOOST_LOG_TRIVIAL(trace) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
     Configuration config;
     // Случай с некорректным файлом.
     string badStr = "bad";

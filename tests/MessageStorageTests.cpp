@@ -13,14 +13,14 @@ using namespace receiver;
 using namespace std;
 
 void MessageStorageTests::setQuantityTest() {
-    BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
+    BOOST_LOG_TRIVIAL(trace) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
     MessageStorage::setQuantity(COUNT);
     // Проверка установленного параметра.
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение параметра", (unsigned int)COUNT, (unsigned int)MessageStorage::getQuantity());
 }
 
 void MessageStorageTests::addTest() {
-    BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
+    BOOST_LOG_TRIVIAL(trace) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
     // Проверка хранилища на пустоту.
     MessageStorage::clear();
     CPPUNIT_ASSERT_MESSAGE("Некорректное количество сообщений в хранилище", MessageStorage::getAll().empty());
@@ -37,7 +37,7 @@ void MessageStorageTests::addTest() {
 }
 
 void MessageStorageTests::clearTest() {
-    BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
+    BOOST_LOG_TRIVIAL(trace) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
     // Проверка пустоты хранилища.
     CPPUNIT_ASSERT_MESSAGE("Некорректное количество сообщений в хранилище", !MessageStorage::getAll().empty());
     // Очистка хранилища.
@@ -46,7 +46,7 @@ void MessageStorageTests::clearTest() {
 }
 
 void MessageStorageTests::getMessagesTest() {
-    BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
+    BOOST_LOG_TRIVIAL(trace) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
     // Очистка хранилища перед тестом.
     MessageStorage::clear();
     // Добавление тестовых записей в хранилище.

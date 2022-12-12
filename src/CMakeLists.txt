@@ -5,6 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(PkgConfig REQUIRED)
 find_package(jsoncpp REQUIRED)
 
+include(FindProtobuf)
+find_package(Protobuf REQUIRED)
+include_directories(${PROTOBUF_INCLUDE_DIR})
+
 file(GLOB SOURCE_FILES "*.h" "*.cpp")
 add_executable(receiver ${SOURCE_FILES})
 

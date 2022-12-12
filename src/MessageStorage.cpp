@@ -28,9 +28,13 @@ void MessageStorage::addMessage(string &message) {
 }
 
 vector<string> MessageStorage::getMessages() {
-    // Получение backetSize ранних сообщений.
+    // Буфер для результата.
     vector<string> result;
-    for (int i = 0; i < backetSize; i++) {
+    // Получение количества записей.
+    auto size = backetSize;
+    if (acMessages.size() < backetSize) size = acMessages.size();
+    // Копирование сообщений.
+    for (int i = 0; i < size; i++) {
         result.push_back(acMessages[i]);
     }
     // Удаление обработанных записей.

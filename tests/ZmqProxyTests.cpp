@@ -20,7 +20,7 @@ using namespace receiver;
 
 /** Имитатор отправителя запросов. */
 vector<string> imitation() {
-    BOOST_LOG_TRIVIAL(debug) << "Запуск имитатора отправителя запросов";
+    BOOST_LOG_TRIVIAL(trace) << "Запуск имитатора отправителя запросов";
     context_t context(1);
     socket_t sock(context, ZMQ_PUSH);
     sock.connect(IMIT_HOST);
@@ -40,7 +40,7 @@ vector<string> imitation() {
 }
 
 void ZmqProxyTests::listenerTest() {
-    BOOST_LOG_TRIVIAL(debug) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
+    BOOST_LOG_TRIVIAL(trace) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
     string hostName(IMIT_HOST);
     // Инициализация слушателя.
     pZmqListener = make_shared<ZmqProxy>(hostName);

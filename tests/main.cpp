@@ -7,10 +7,12 @@
 #include "ConfigurationReaderTests.h"
 #include "MessageStorageTests.h"
 #include "ZmqProxyTests.h"
+#include "AnalyzerTests.h"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(ConfigurationReaderTests);
 CPPUNIT_TEST_SUITE_REGISTRATION(MessageStorageTests);
 CPPUNIT_TEST_SUITE_REGISTRATION(ZmqProxyTests);
+CPPUNIT_TEST_SUITE_REGISTRATION(AnalyzerTests);
 
 int main()
 {
