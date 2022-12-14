@@ -22,11 +22,15 @@ bool Configuration::fromFile(const std::string &filename)
     file.close();
     // Набор названий полей объекта.
     auto keys = config.getMemberNames();
-    if (find(keys.begin(), keys.end(), "pull_port") == keys.end() || !config["pull_port"].isUInt() ||
-        find(keys.begin(), keys.end(), "processed_size") == keys.end() || !config["processed_size"].isUInt()) {
+    if (find(keys.begin(), keys.end(), "worker_port") == keys.end() || !config["worker_port"].isUInt() ||
+        find(keys.begin(), keys.end(), "processed_size") == keys.end() || !config["processed_size"].isUInt() ||
+        find(keys.begin(), keys.end(), "version") == keys.end() || !config["version"].isUInt() ||
+        find(keys.begin(), keys.end(), "worker_host") == keys.end() || !config["worker_host"].isString()) {
         return false;
     }
-    workerPort = config["pull_port"].asUInt();
+    workerPort = config["worker_port"].asUInt();
+    workerHost = config["worker_host"].asString();
     backetSize = config["processed_size"].asUInt();
+    version = config["version"].asUInt();
     return true;
 }

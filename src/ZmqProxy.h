@@ -40,12 +40,12 @@ namespace receiver {
         /**
          * Запустить прослушивание PULL сокета.
          */
-        void startListen();
+        void start();
 
         /**
          * Остановить прослушивание PULL сокета.
          */
-        void stopListen();
+        void stop();
     };
 }
 

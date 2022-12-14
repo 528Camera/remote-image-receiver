@@ -7,6 +7,8 @@ set(SOURCE_FILES
         ../src/ZmqProxy.cpp
         ../src/Analyzer.h
         ../src/Analyzer.cpp
+        ../src/FrameStreamer.h
+        ../src/FrameStreamer.cpp
         ConfigurationReaderTests.h
         ConfigurationReaderTests.cpp
         MessageStorageTests.h
@@ -15,6 +17,8 @@ set(SOURCE_FILES
         ZmqProxyTests.cpp
         AnalyzerTests.h
         AnalyzerTests.cpp
+        FrameStreamerTests.h
+        FrameStreamerTests.cpp
         main.cpp)
 
 add_executable(receiver-tests ${SOURCE_FILES})
@@ -23,6 +27,7 @@ include(FindProtobuf)
 find_package(Protobuf REQUIRED)
 include_directories(${PROTOBUF_INCLUDE_DIR})
 
+find_package(OpenCV REQUIRED )
 find_package(PkgConfig)
 pkg_check_modules(PC_ZeroMQ QUIET zmq)
 find_path(ZeroMQ_INCLUDE_DIR
@@ -33,6 +38,7 @@ find_library(ZeroMQ_LIBRARY
         PATHS ${PC_ZeroMQ_LIBRARY_DIRS})
 
 include_directories(${Boost_INCLUDE_DIR})
+target_link_libraries(receiver-tests LINK_PUBLIC ${OpenCV_LIBS})
 target_link_libraries(receiver-tests LINK_PUBLIC proto ${PROTOBUF_LIBRARY})
 target_link_libraries(receiver-tests LINK_PUBLIC Boost::log_setup Boost::log)
 target_link_libraries(receiver-tests LINK_PUBLIC ${Boost_LIBRARIES})

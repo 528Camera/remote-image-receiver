@@ -12,7 +12,7 @@
 /** Строка подключения имитатора. */
 #define IMIT_HOST "tcp://127.0.0.1:10001"
 /** Размер корзины для теста. */
-#define BACKET_SIZE 10
+#define BACKET_SIZE 20
 
 using namespace std;
 using namespace zmq;
@@ -26,11 +26,11 @@ vector<string> imitation() {
     sock.connect(IMIT_HOST);
     vector<string> sended;
     // Отправка тестовых сообщений.
-    for (int i = 0; i < BACKET_SIZE * 2; i++) {
+    for (int i = 0; i < BACKET_SIZE; i++) {
         // Инциализация сообщения.
         string stream(to_string(i));
         zmq::message_t msg(stream.c_str(), stream.length());
-        auto res = sock.send(msg, send_flags::sndmore);
+        auto res = sock.send(msg, send_flags::dontwait);
         sended.push_back(stream);
     }
     sock.disconnect(IMIT_HOST);
@@ -46,18 +46,19 @@ void ZmqProxyTests::listenerTest() {
     pZmqListener = make_shared<ZmqProxy>(hostName);
     // Инициализация хранилища.
     MessageStorage::setQuantity((unsigned int)BACKET_SIZE);
+    MessageStorage::clear();
     // Запуск прослушивания.
-    pZmqListener->startListen();
+    pZmqListener->start();
     // Запуск имитации отправления запросов.
     auto ff = async(imitation);
     // Остановка прослушивания.
     ff.wait();
     auto sendedMes = ff.get();
-    pZmqListener->stopListen();
+    pZmqListener->stop();
     // Проверка хранилища принятых сообщений.
     auto curMes = MessageStorage::getAll();
-    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE * 2, (int)sendedMes.size());
-    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE * 2, (int)curMes.size());
+    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE, (int)sendedMes.size());
+    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE, (int)curMes.size());
     for (int i = 0; i < curMes.size(); i++) {
         CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное сообщение", sendedMes[i], curMes[i]);
     }

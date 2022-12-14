@@ -13,31 +13,26 @@ using namespace zmq;
 using namespace receiver;
 
 ZmqProxy::ZmqProxy(std::string& _url) : url(_url) {
-    BOOST_LOG_TRIVIAL(trace) << "Создание объекта для прослушивания ZMQ-сокета...";
     thread = pthread_t();
     isStarted = false;
     stopped = false;
     pContext = make_shared<context_t>(ZMQ_THREADS);
-    BOOST_LOG_TRIVIAL(trace) << "Объект для прослушивания ZMQ-сокета успешно создан";
 }
 
-void ZmqProxy::startListen() {
-    BOOST_LOG_TRIVIAL(trace) << "Запуск прослушивания...";
+void ZmqProxy::start() {
     if (!isStarted) {
         stopped = false;
+        isStarted = true;
+        thread = pthread_t();
         pthread_create(&thread, nullptr, ZmqProxy::threadRoutine, this);
-        BOOST_LOG_TRIVIAL(trace) << "Прослушивание запущено";
-    } else BOOST_LOG_TRIVIAL(trace) << "Прослушивание уже запущено";
+    }
 }
 
-void ZmqProxy::stopListen() {
-    BOOST_LOG_TRIVIAL(trace) << "Остановка прослушивания...";
+void ZmqProxy::stop() {
     stopped = true;
+    isStarted = false;
     pContext = nullptr;
     pthread_join(thread, nullptr);
-    thread = pthread_t();
-    isStarted = false;
-    BOOST_LOG_TRIVIAL(trace) << "Прослушивание остановлено";
 }
 
 void* ZmqProxy::threadRoutine(void *arg) {

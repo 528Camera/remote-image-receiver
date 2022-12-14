@@ -18,7 +18,9 @@ void ConfigurationReaderTests::fromFileTest() {
     // Проверка параметров и результата.
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Неожиданное поведение при загрузке конфигурации", false, badRes);
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение конфиг-параметра", (unsigned int)0, config.workerPort);
+    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение конфиг-параметра", string("127.0.0.1"), config.workerHost);
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение конфиг-параметра", (unsigned int)0, config.backetSize);
+    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение конфиг-параметра", (unsigned int)1, config.version);
 
     // Случай с корректным файлом.
     string goodStr = "tests_data/config.json";
@@ -26,5 +28,7 @@ void ConfigurationReaderTests::fromFileTest() {
     // Проверка параметров и результата.
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Неожиданное поведение при загрузке конфигурации", true, goodRes);
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение конфиг-параметра", (unsigned int)8049, config.workerPort);
-    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение конфиг-параметра", (unsigned int)5, config.backetSize);
+    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение конфиг-параметра", string("127.0.0.1"), config.workerHost);
+    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение конфиг-параметра", (unsigned int)20, config.backetSize);
+    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное значение конфиг-параметра", (unsigned int)1, config.version);
 }

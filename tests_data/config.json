@@ -1,4 +1,6 @@
 {
-  "pull_port": 8049,
-  "processed_size": 5
+  "worker_port": 8049,
+  "worker_host": "127.0.0.1",
+  "processed_size": 20,
+  "version": 1
 }

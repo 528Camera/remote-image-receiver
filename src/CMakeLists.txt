@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(PkgConfig REQUIRED)
 find_package(jsoncpp REQUIRED)
+find_package(OpenCV REQUIRED)
 
 include(FindProtobuf)
 find_package(Protobuf REQUIRED)
@@ -13,6 +14,7 @@ file(GLOB SOURCE_FILES "*.h" "*.cpp")
 add_executable(receiver ${SOURCE_FILES})
 
 include_directories(${Boost_INCLUDE_DIR})
+target_link_libraries(receiver LINK_PUBLIC ${OpenCV_LIBS})
 target_link_libraries(receiver LINK_PUBLIC proto ${PROTOBUF_LIBRARY})
 target_link_libraries(receiver LINK_PUBLIC jsoncpp_lib)
 target_link_libraries(receiver LINK_PUBLIC Boost::log_setup Boost::log)

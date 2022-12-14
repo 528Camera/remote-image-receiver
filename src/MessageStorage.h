@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <string>
+#include <mutex>
 
 namespace receiver {
     /**
@@ -15,6 +16,9 @@ namespace receiver {
     class MessageStorage {
         /** Хранилище принятых сообщений. */
         static std::vector<std::string> acMessages;
+
+        /** Мьютекс. */
+        static std::mutex mutex;
 
         /** Размер возвращаемого набора сообщений. */
         static unsigned int backetSize;

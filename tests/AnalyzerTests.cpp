@@ -11,6 +11,8 @@
 #define VERSION 1
 /** Тестовый размер обрабатываемой корзины. */
 #define BACKET_SIZE 20
+/** Количество записей в хранилище. */
+#define STORAGE_SIZE 200
 
 using namespace receiver;
 using namespace std;
@@ -19,31 +21,29 @@ void AnalyzerTests::setUp() {
     // Инициализация анализатора сообщений.
     pAnalyzer = make_shared<Analyzer>(VERSION);
     MessageStorage::setQuantity(BACKET_SIZE);
+    // Запуск анализатора принятых сообщений.
+    pAnalyzer->start();
 }
 
 void AnalyzerTests::tearDown() {
-    pAnalyzer = nullptr;
+    // Остановка анализатора принятых сообщений.
+    pAnalyzer->stop();
 }
 
 void AnalyzerTests::analyzeTest() {
     BOOST_LOG_TRIVIAL(trace) << __FILE__ << ":" << __FUNCTION__ << ":" << __LINE__;
     // Формирование тестовых сообщений.
-    for (int i = 0; i < BACKET_SIZE * 2; i++) {
+    for (int i = 0; i < STORAGE_SIZE; i++) {
         Message mes;
         mes.set_version(VERSION);
-        mes.set_frame_id(BACKET_SIZE * 2 - i - 1);
-        mes.set_timestamp(0);
-        mes.set_image_data("");
+        mes.set_frame_index(STORAGE_SIZE - i - 1);
+        mes.set_image("");
         // Сериализация сообщения.
         auto serialized = mes.SerializeAsString();
         // Добавление сообщения в хранилище.
         MessageStorage::addMessage(serialized);
     }
-    // Анализ принятых сообщений.
-    auto analyzedMessages = pAnalyzer->analyze();
+    sleep(1);
     // Проверка проанализированных сообщений.
-    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE, (int)analyzedMessages.size());
-    for (int i = 0; i < analyzedMessages.size(); i++) {
-        CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE + i, (int)analyzedMessages[i].frame_id());
-    }
+    CPPUNIT_ASSERT_MESSAGE("Некорректное количество сообщений в хранилище", MessageStorage::getAll().empty());
 }
