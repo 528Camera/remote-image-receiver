@@ -2,7 +2,6 @@
  * Реализация класса, обеспечивающего сетевое взаимодействие.
  */
 
-#include <boost/log/trivial.hpp>
 #include "ZmqProxy.h"
 #include "MessageStorage.h"
 
@@ -39,8 +38,8 @@ void* ZmqProxy::threadRoutine(void *arg) {
     // Получение доступа к элементам класса.
     auto _this = (ZmqProxy*)arg;
     // Создание сокета для прослушивания.
-    socket_t socket(*_this->pContext, ZMQ_PULL);
-    socket.bind(_this->url.c_str());
+    socket_t socket(*_this->pContext, socket_type::pull);
+    socket.connect(_this->url.c_str());
     // Прослушивание.
     while(!_this->stopped) {
         try {

@@ -4,6 +4,7 @@
 
 #include <boost/log/trivial.hpp>
 #include "ReceiverService.h"
+#include "MessageStorage.h"
 
 using namespace std;
 using namespace receiver;
@@ -18,6 +19,12 @@ ReceiverService::ReceiverService(const std::string &configFilename) {
     workersAddress = "tcp://" + config.workerHost + ":" + to_string(config.workerPort);
     pZmqProxy = make_shared<ZmqProxy>(workersAddress);
     pAnalyzer = make_shared<Analyzer>(config.version);
+
+    BOOST_LOG_TRIVIAL(trace) << "Подготовка хранилища...";
+    MessageStorage::setQuantity(config.backetSize);
+    MessageStorage::clear();
+    BOOST_LOG_TRIVIAL(trace) << "Хранилище подготовлено...";
+
     BOOST_LOG_TRIVIAL(trace) << "Сервис создан";
 }
 

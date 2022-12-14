@@ -22,6 +22,7 @@ unsigned int MessageStorage::getQuantity() {
 }
 
 void MessageStorage::addMessage(const char *message) {
+    std::lock_guard<std::mutex> lock(mutex);
     string mes(message);
     addMessage(mes);
 }

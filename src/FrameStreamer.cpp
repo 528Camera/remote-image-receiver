@@ -13,8 +13,6 @@ using namespace receiver;
 using namespace cv;
 
 void FrameStreamer::showImages(std::vector<Message> &mes) {
-    // Инициализация пустого сообщения.
-
     // Обработка изображений.
     for (auto& m : mes) {
         // Вектор байтов изображения.

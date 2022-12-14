@@ -2,7 +2,6 @@
  * Реализация анализатора принятых сообщений.
  */
 
-#include <boost/log/trivial.hpp>
 #include "Analyzer.h"
 #include "MessageStorage.h"
 

@@ -18,6 +18,12 @@ class ZmqProxyTests : public CppUnit::TestFixture {
     CPPUNIT_TEST_SUITE_END();
 
 public:
+    /** Инициализация объектов теста. */
+    void setUp() override;
+
+    /** Освобождение ресурсов теста. */
+    void tearDown() override;
+
     /** Тест сетевого взаимодействия. */
     void listenerTest();
 

@@ -5,7 +5,6 @@
 #include <json/json.h>
 #include <fstream>
 #include <vector>
-#include <algorithm>
 #include "ConfigurationReader.h"
 
 using namespace std;
