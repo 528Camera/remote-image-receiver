@@ -16,7 +16,7 @@ ReceiverService::ReceiverService(const std::string &configFilename) {
         throw invalid_argument("Не удалось прочитать конфигурационный файл " + configFilename + ".");
     }
     BOOST_LOG_TRIVIAL(trace) << "Конфигурационный файл считан";
-    workersAddress = "tcp://" + config.workerHost + ":" + to_string(config.workerPort);
+    workersAddress = "tcp://*:" + to_string(config.workerPort);
     pZmqProxy = make_shared<ZmqProxy>(workersAddress);
     pAnalyzer = make_shared<Analyzer>(config.version);
 

@@ -1,6 +1,5 @@
 {
   "worker_port": 5557,
-  "worker_host": "192.168.0.104",
-  "processed_size": 20,
+  "processed_size": 10,
   "version": 1
 }

@@ -39,7 +39,7 @@ void* ZmqProxy::threadRoutine(void *arg) {
     auto _this = (ZmqProxy*)arg;
     // Создание сокета для прослушивания.
     socket_t socket(*_this->pContext, socket_type::pull);
-    socket.connect(_this->url.c_str());
+    socket.bind(_this->url.c_str());
     // Прослушивание.
     while(!_this->stopped) {
         try {

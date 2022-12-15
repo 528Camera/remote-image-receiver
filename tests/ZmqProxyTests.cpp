@@ -10,9 +10,9 @@
 #include "MessageStorage.h"
 
 /** Строка подключения имитатора. */
-#define IMIT_HOST "tcp://*:10001"
+#define ZMQ_HOST "tcp://*:10001"
 /** Строка для сетевого взаимодействия с имитатором. */
-#define ZMQ_HOST "tcp://127.0.0.1:10001"
+#define IMIT_HOST "tcp://127.0.0.1:10001"
 /** Размер корзины для теста. */
 #define BACKET_SIZE 20
 
@@ -22,10 +22,9 @@ using namespace receiver;
 
 /** Имитатор отправителя запросов. */
 vector<string> imitation() {
-    BOOST_LOG_TRIVIAL(trace) << "Запуск имитатора отправителя запросов";
     context_t context(1);
     socket_t sock(context, socket_type::push);
-    sock.bind(IMIT_HOST);
+    sock.connect(IMIT_HOST);
     vector<string> sended;
     // Отправка тестовых сообщений.
     for (int i = 0; i < BACKET_SIZE; i++) {
@@ -35,6 +34,7 @@ vector<string> imitation() {
         auto res = sock.send(msg, send_flags::none);
         sended.push_back(stream);
     }
+    sock.disconnect(IMIT_HOST);
     sock.close();
     context.close();
     return sended;
@@ -62,6 +62,7 @@ void ZmqProxyTests::listenerTest() {
     // Запуск имитации отправления запросов.
     auto ff = async(imitation);
     auto sendedMes = ff.get();
+    sleep(1);
     // Проверка хранилища принятых сообщений.
     auto curMes = MessageStorage::getAll();
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE, (int)sendedMes.size());
