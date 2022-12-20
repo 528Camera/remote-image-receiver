@@ -16,3 +16,4 @@ ___
 * libjsoncpp-dev
 * libboost-all-dev
 * libcppunit-dev
+* libopencv-dev
