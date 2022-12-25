@@ -1,5 +1,5 @@
 {
   "worker_port": 5557,
-  "processed_size": 10,
+  "processed_size": 500,
   "version": 1
 }

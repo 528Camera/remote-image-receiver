@@ -27,7 +27,7 @@ void FrameStreamer::showImages(std::vector<Message> &mes) {
             namedWindow(WINNAME);
             moveWindow(WINNAME, 0, 0);
             imshow(WINNAME, img);
-            waitKey(1);
+            waitKey(50);
         } catch(const exception& ex) {}
     }
 }

@@ -12,7 +12,7 @@
 /** Тестовый номер версии. */
 #define VERSION 1
 /** Количество кадров для теста. */
-#define FRAME_COUNT 1000
+#define FRAME_COUNT 20
 
 using namespace std;
 using namespace receiver;

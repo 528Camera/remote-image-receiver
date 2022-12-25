@@ -27,12 +27,13 @@ vector<string> imitation() {
     sock.connect(IMIT_HOST);
     vector<string> sended;
     // Отправка тестовых сообщений.
-    for (int i = 0; i < BACKET_SIZE; i++) {
+    for (int i = 0; i < BACKET_SIZE * 10; i++) {
         // Инциализация сообщения.
         string stream(to_string(i));
         zmq::message_t msg(stream.c_str(), stream.length());
         auto res = sock.send(msg, send_flags::none);
         sended.push_back(stream);
+        usleep(124000);
     }
     sock.disconnect(IMIT_HOST);
     sock.close();
@@ -65,8 +66,8 @@ void ZmqProxyTests::listenerTest() {
     sleep(1);
     // Проверка хранилища принятых сообщений.
     auto curMes = MessageStorage::getAll();
-    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE, (int)sendedMes.size());
-    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE, (int)curMes.size());
+    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE * 10, (int)sendedMes.size());
+    CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное количество сообщений", (int)BACKET_SIZE * 10, (int)curMes.size());
     for (int i = 0; i < curMes.size(); i++) {
         CPPUNIT_ASSERT_EQUAL_MESSAGE("Некорректное сообщение", sendedMes[i], curMes[i]);
     }
